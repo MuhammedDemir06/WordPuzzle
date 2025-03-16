@@ -751,11 +751,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 390583284}
   parent: {fileID: 390583283}
-  cellSizeX: 200
-  cellSizeY: 200
-  constraintCount: 2
-  spawnNumber: 8
-  tilePrefab: {fileID: 7808645023075907044, guid: 0872aa05c1b981444898274bcf9a954b, type: 3}
+  cellSize: 200
+  constraintCount: 4
+  spawnNumber: 12
+  tilePrefab: {fileID: 4654870190578537130, guid: 6deda7a660ec24944b25a47379afff71, type: 3}
+  letters:
+  - e
+  - 
+  - 
+  - 
+  - a
+  - 
+  - 
+  - c
+  - 
+  - k
+  - 
+  - m
+  alphabetLetters:
+  - 8
+  - 9
+  - 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
