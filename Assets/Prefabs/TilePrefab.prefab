@@ -116,7 +116,6 @@ MonoBehaviour:
   tileLetter: 
   tileText: {fileID: 9155346853800127874}
   selectedColor: {r: 0.24885845, g: 1, b: 0, a: 1}
-  tileImage: {fileID: 5548711898222137105}
 --- !u!114 &806025787286284052
 MonoBehaviour:
   m_ObjectHideFlags: 0

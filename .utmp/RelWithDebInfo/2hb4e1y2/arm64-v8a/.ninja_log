@@ -1,0 +1,11 @@
+# ninja log v5
+49	536	7645281958057091	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	114112b5ca5d748e
+537	872	7645281960781183	D:/Unity Projects/My Github Projects/WordPuzzle/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2hb4e1y2/obj/arm64-v8a/libswappywrapper.so	e4a95826366d990d
+20	1320	7645281965842041	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	fe1ee22f933305c5
+7	1346	7645281966132168	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	f8b5a7c7cbf2da9f
+26	1357	7645281966241739	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	18a48ec2aff9cb5d
+41	1447	7645281967129251	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	ed7a5e48bd12dbd6
+14	1546	7645281968085964	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	7d8850a1cbc3950d
+33	1644	7645281969143829	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	261f12f067d405f6
+1	1736	7645281970030708	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	6b139dadc051c786
+1736	1918	7645281971442941	D:/Unity Projects/My Github Projects/WordPuzzle/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/2hb4e1y2/obj/arm64-v8a/libgame.so	144300351f93b517
