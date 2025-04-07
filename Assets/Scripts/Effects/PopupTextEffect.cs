@@ -6,24 +6,30 @@ using UnityEngine;
 
 public class PopupTextEffect : MonoBehaviour
 {
-    public RectTransform textTransform;
+    public RectTransform effectTransform;
+    [Header("For Text")]
     [SerializeField] private TextMeshProUGUI text;
 
     private void Start()
     {
         text.gameObject.SetActive(true);
-        PlayPopupEffect("Welcome");
+        PlayPopupEffectForText("Welcome");
     }
-    public void PlayPopupEffect(string newText)
+    //For Text
+    public void PlayPopupEffectForText(string newText)
     {
         text.text = newText;
-        textTransform.localScale = Vector3.zero;
+        PlayPopupEffect();
+    }
+    public void PlayPopupEffect()
+    {
+        effectTransform.localScale = Vector3.zero;
 
         Sequence seq = DOTween.Sequence();
 
-        seq.Append(textTransform.DOScale(1.5f, 0.5f).SetEase(Ease.OutBack)); 
+        seq.Append(effectTransform.DOScale(1.5f, 0.5f).SetEase(Ease.OutBack));
         seq.AppendInterval(0.3f); // Kısa süre kal
-        seq.Append(textTransform.DOScale(0f, 0.4f).SetEase(Ease.InBack));
+        seq.Append(effectTransform.DOScale(0f, 0.4f).SetEase(Ease.InBack));
 
         seq.OnComplete(() => {
         });

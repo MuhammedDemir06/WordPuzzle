@@ -38,6 +38,11 @@ public class GridManager : MonoBehaviour
     [Header("Effects")]
     [SerializeField] private SlideTextEffect slideTextEffect;
     [SerializeField] private PopupTextEffect popupTextEffect;
+    [SerializeField] private string[] levelFinishText;
+    [SerializeField] private string[] levelWordText;
+    [Header("UI")]
+    [SerializeField] private GameUIManager uIManager;
+    [SerializeField] private float finishScreenTime = 1f;
     private void Awake()
     {
         Instance = this;
@@ -126,22 +131,9 @@ public class GridManager : MonoBehaviour
                     selectedLettersPrefab[i].ColorChange = false;
                     selectedLettersPrefab[i].SetColor(false);
                 }
-                int newIndex = Random.Range(0, 4);
-                switch(newIndex)
-                {
-                    case 0:
-                        slideTextEffect.PlaySlideEffect("+1");
-                        break;
-                    case 1:
-                        slideTextEffect.PlaySlideEffect("PERFECT");
-                        break;
-                    case 2:
-                        slideTextEffect.PlaySlideEffect("GOOD");
-                        break;
-                    case 3:
-                        slideTextEffect.PlaySlideEffect("AWESOME");
-                        break;
-                }
+                int newIndex = Random.Range(0, levelWordText.Length);
+                slideTextEffect.PlaySlideEffect(levelWordText[newIndex]);
+                
                 Debug.Log("Equal");
             }
             else
@@ -174,24 +166,15 @@ public class GridManager : MonoBehaviour
         }
         if(wordIndex==currentWords.Count)
         {
-            Debug.Log("Game Finished");
-            int newIndex = Random.Range(0, 4);
-            switch(newIndex)
-            {
-                case 0:
-                    popupTextEffect.PlayPopupEffect("FINISHED !!");
-                    break;
-                case 1:
-                    popupTextEffect.PlayPopupEffect("EXCELLENT");
-                    break;
-                case 2:
-                    popupTextEffect.PlayPopupEffect("BEST");
-                    break;
-                case 3:
-                    popupTextEffect.PlayPopupEffect("PRETTY GOOD");
-                    break;
-            }
+            Invoke(nameof(RunFinishScreen), finishScreenTime);
+            Debug.Log("Level Finished");
+            int newIndex = Random.Range(0, levelFinishText.Length);
+            popupTextEffect.PlayPopupEffectForText(levelFinishText[newIndex]);
         }
+    }
+    private void RunFinishScreen()
+    {
+        uIManager.FinishScreenShow();
     }
     private void SelectLetter()
     {
