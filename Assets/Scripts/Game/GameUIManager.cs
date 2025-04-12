@@ -45,11 +45,16 @@ public class GameUIManager : MonoBehaviour
         else
             pauseScreenPanel.Hide();
     }
-    public void ActiveNewWordButton()
-    {
-        if (!GameManager.Instance.UpdateCash(100))
-            return;
+    //public void ActiveNewWordButton()
+    //{
+    //    if (!GameManager.Instance.UpdateCash(100))
+    //        return;
 
-        GridManager.Instance.NewWordActive();
+    //    GridManager.Instance.NewWordActive();
+    //}
+    public void NextLevelButton()
+    {
+        GameManager.Instance.CurrentLevel += 1;
+        GameManager.Instance.SaveLevelData();
     }
 }

@@ -7,7 +7,9 @@ Library: D:\Unity Projects\My Github Projects\WordPuzzle\Temp\BurstOutput\tempbu
 --dump=Function
 --float-precision=Standard
 --target-framework=NetFramework
+--assembly-defines=Assembly-CSharp-firstpass;
 --assembly-defines=Assembly-CSharp;
+--assembly-defines=DOTween;
 --assembly-defines=Mono.Security;
 --assembly-defines=mscorlib;
 --assembly-defines=System.Configuration;

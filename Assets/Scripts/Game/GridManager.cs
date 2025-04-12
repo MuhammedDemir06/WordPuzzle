@@ -11,16 +11,16 @@ public class GridManager : MonoBehaviour
     [SerializeField] private Transform wordParent;
     [SerializeField] private float spawningTime = 0.2f;
     [Header("x and y  value : min = 80 -100 ,max = 300")]
-    [SerializeField] private int cellSize;
+    private int cellSize;
     [Header("Number of words in each row && longest letter count")]
-    [SerializeField] private int constraintCount;
-    [SerializeField] private int spawnNumber;
+    private int constraintCount;
+    private int spawnNumber;
     [Header("Prefabs")]
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject wordPrefab;
     [Header("Lists")]
     [SerializeField] private List<GameObject> spawnedLetters;
-    [SerializeField] private string[] letters;
+    [SerializeField] private List<string> letters;
     [SerializeField] private string[] alphabetLetters;
     [SerializeField] private List<string> words;
     public bool CanSelect;
@@ -49,7 +49,6 @@ public class GridManager : MonoBehaviour
     }
     private void Start()
     {
-        CanSelect = true;
         Init();
     }
     public void AddNewChar(string letter,Tile selectedLetterPrefab)
@@ -59,6 +58,22 @@ public class GridManager : MonoBehaviour
 
         writtenWord.text += letter.ToUpper();
         isClick = true;
+    }
+    private void Init()
+    {
+        CanSelect = true;
+
+        Default();
+        StartCoroutine(TileSpawner());
+        StartCoroutine(WordSpawner());
+    }
+    public void GetLevelData(LevelData levelData)
+    {
+        cellSize = levelData.CellSize;
+        constraintCount = levelData.ConstraintCount;
+        spawnNumber = levelData.SpawnNumber;
+        letters = levelData.Letters;
+        words = levelData.Words;
     }
     private void Default()
     {
@@ -74,12 +89,7 @@ public class GridManager : MonoBehaviour
         gridSpacing.y = cellSize / 4;
         letterGrid.spacing = gridSpacing;    
     }
-    private void Init()
-    {
-        Default();
-        StartCoroutine(TileSpawner());
-        StartCoroutine(WordSpawner());
-    }
+    
     private System.Collections.IEnumerator TileSpawner()
     {
         for (int i = 0; i < spawnNumber; i++)
@@ -110,8 +120,7 @@ public class GridManager : MonoBehaviour
             newWord.GetComponentInChildren<TextMeshProUGUI>().text = words[i];
             currentWords.Add(newWord.GetComponent<WordControl>());
         }
-    }
-    
+    } 
     public void EndSelection()
     {
         if (selectedLetters.Count > 0)
@@ -148,7 +157,6 @@ public class GridManager : MonoBehaviour
             selectedLettersPrefab.Clear();
         }
     }
-
     private void Word()
     {
         for (int i = 0; i < currentWords.Count; i++)
