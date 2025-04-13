@@ -11,5 +11,9 @@ public class LevelData : ScriptableObject
     public List<string> Letters;
     [Header("Words")]
     public List<string> Words;
+    [Space(5)]
+    public bool CanEarnReward = true;
+    [Header("Level Background")]
+    public Sprite LevelBackground;
 }
 

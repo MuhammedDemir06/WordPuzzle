@@ -7,7 +7,7 @@ using UnityEngine;
 public class PopupTextEffect : MonoBehaviour
 {
     public RectTransform effectTransform;
-    [Header("For Text")]
+
     [SerializeField] private TextMeshProUGUI text;
 
     private void Start()

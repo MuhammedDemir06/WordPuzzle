@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static System.TimeZoneInfo;
 
 public class SceneTransitionEffect : MonoBehaviour
 {
@@ -13,15 +14,25 @@ public class SceneTransitionEffect : MonoBehaviour
     {
         Instance = this;
     }
-    public void LoadScene(string nextScene)
+    public void LoadScene(string sceneName)
+    {
+        StartCoroutine(LoadSceneRoutine(sceneName));
+    }
+    private IEnumerator LoadSceneRoutine(string sceneName)
     {
         anim.SetTrigger("End");
-        StartCoroutine(NextSceneTime(nextScene));
-    }
-    private IEnumerator NextSceneTime(string next)
-    {
+
         yield return new WaitForSeconds(nextSceneTime);
-        SceneManager.LoadScene(next);
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        asyncLoad.allowSceneActivation = false;
+
+        while (asyncLoad.progress < 0.9f)
+        {
+            yield return null;
+        }
+
+        asyncLoad.allowSceneActivation = true;
     }
     public void ExitGame()
     {

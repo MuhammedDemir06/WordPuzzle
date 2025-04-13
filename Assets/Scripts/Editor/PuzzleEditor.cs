@@ -7,7 +7,6 @@ public class PuzzleEditor : EditorWindow
 {
    // [Header("value : min = 80 -100 ,max = 300")]
     private int cellSize = 50;
-    //[Header("Number of words in each row && longest letter count")]
     private int gridX = 3;
 
     private int gridY = 3;
@@ -16,6 +15,7 @@ public class PuzzleEditor : EditorWindow
     private List<string> letters;
     private List<int> selectedIndices = new List<int>();
     private string inputWord = "";
+    private Sprite LevelBackground;
 
     private Vector2 scrollPos;
 
@@ -33,6 +33,7 @@ public class PuzzleEditor : EditorWindow
         gridX = EditorGUILayout.IntField("grid X", gridX);
         gridY = EditorGUILayout.IntField("grid Y", gridY);
         currentLevel = EditorGUILayout.IntField("Current Level", currentLevel);
+        LevelBackground = (Sprite)EditorGUILayout.ObjectField("Sprite Icon", LevelBackground, typeof(Sprite), false);
 
         int totalCells = gridX * gridY;
         while (letters.Count < totalCells) letters.Add("");
@@ -56,6 +57,10 @@ public class PuzzleEditor : EditorWindow
         if (GUILayout.Button("Reset All", GUILayout.Width(100)))
         {
             ResetAll();
+        }
+        if(GUILayout.Button("How Create Level ?",GUILayout.Width(150)))
+        {
+            Application.OpenURL("https://www.youtube.com/watch?v=uC1YI-QppBM");
         }
 
         EditorGUILayout.EndHorizontal();
@@ -208,7 +213,8 @@ public class PuzzleEditor : EditorWindow
         level.CellSize = cellSize * 4;
         level.ConstraintCount = gridX;
         level.Letters = new List<string>(letters);
-        level.Words = new List<string>(words); 
+        level.Words = new List<string>(words);
+        level.LevelBackground = LevelBackground;
 
         string path = "Assets/Levels/Level_" + $"{currentLevel}" + ".asset";
         AssetDatabase.CreateAsset(level, path);

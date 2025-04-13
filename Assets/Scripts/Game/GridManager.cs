@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GridManager : MonoBehaviour
 {
+    public static System.Action<int> LevelFinish;
     public static GridManager Instance;
 
     [SerializeField] private GridLayoutGroup letterGrid;
@@ -22,7 +23,7 @@ public class GridManager : MonoBehaviour
     [SerializeField] private List<GameObject> spawnedLetters;
     [SerializeField] private List<string> letters;
     [SerializeField] private string[] alphabetLetters;
-    [SerializeField] private List<string> words;
+
     public bool CanSelect;
     [Header("Selected Letters")]
     [SerializeField] private GameObject writtenWordImage;
@@ -34,6 +35,7 @@ public class GridManager : MonoBehaviour
     [Header("Word")]
     [SerializeField] private List<WordControl> currentWords;
     [SerializeField] private int wordIndex;
+    [SerializeField] private List<string> words;
     public bool IsPointerDown;
     [Header("Effects")]
     [SerializeField] private SlideTextEffect slideTextEffect;
@@ -43,6 +45,10 @@ public class GridManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameUIManager uIManager;
     [SerializeField] private float finishScreenTime = 1f;
+    [SerializeField] private AudioSource chooseWordSound;
+    [SerializeField] private AudioSource letterSelectSound;
+
+    public int numberOfIncorretWords;
     private void Awake()
     {
         Instance = this;
@@ -53,6 +59,8 @@ public class GridManager : MonoBehaviour
     }
     public void AddNewChar(string letter,Tile selectedLetterPrefab)
     {
+        letterSelectSound.Play();
+
         selectedLettersPrefab.Add(selectedLetterPrefab);
         selectedLetters.Add(letter);
 
@@ -61,6 +69,7 @@ public class GridManager : MonoBehaviour
     }
     private void Init()
     {
+        numberOfIncorretWords = 0;
         CanSelect = true;
 
         Default();
@@ -144,6 +153,8 @@ public class GridManager : MonoBehaviour
                 slideTextEffect.PlaySlideEffect(levelWordText[newIndex]);
                 
                 Debug.Log("Equal");
+                if (chooseWordSound != null)
+                    chooseWordSound.Play();
             }
             else
             {
@@ -153,15 +164,17 @@ public class GridManager : MonoBehaviour
                     spawnedLetters[i].GetComponent<Tile>().IsSelected = false;
                     spawnedLetters[i].GetComponent<Tile>().IsActive = false;
                 }
+                numberOfIncorretWords += 1;
             }
             selectedLettersPrefab.Clear();
+            
         }
     }
     private void Word()
     {
         for (int i = 0; i < currentWords.Count; i++)
         {
-            if (writtenWord.text == currentWords[i].Word)
+            if (writtenWord.text == currentWords[i].Word && !currentWords[i].Selected)
             {
                 currentWords[i].Select();
                 currentWords[i].Selected = true;
@@ -171,11 +184,15 @@ public class GridManager : MonoBehaviour
             }
             else
                 isEqual = false;
+                
         }
-        if(wordIndex==currentWords.Count)
+        if (wordIndex == currentWords.Count)
         {
             Invoke(nameof(RunFinishScreen), finishScreenTime);
             Debug.Log("Level Finished");
+            //Finished Level
+            LevelFinish?.Invoke(numberOfIncorretWords);
+            //Random Effect
             int newIndex = Random.Range(0, levelFinishText.Length);
             popupTextEffect.PlayPopupEffectForText(levelFinishText[newIndex]);
         }

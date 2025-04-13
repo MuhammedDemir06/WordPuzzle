@@ -56,7 +56,6 @@ public class Tile : MonoBehaviour
             TrySelect();
         }
     }
-
     public void OnPointerUp()
     {
         GridManager.Instance.IsPointerDown = false;

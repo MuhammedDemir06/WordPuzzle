@@ -10,24 +10,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cc8259a8edfa6c4bb8c07c089568ca3, type: 3}
-  m_Name: Default
+  m_Name: Level_21
   m_EditorClassIdentifier: 
-  CellSize: 300
-  ConstraintCount: 4
-  SpawnNumber: 12
+  CellSize: 200
+  ConstraintCount: 5
+  SpawnNumber: 25
   Letters:
-  - K
-  - I
-  - N
-  - G
-  - Z
-  - O
-  - R
   - T
+  - "\u0130"
+  - M
+  - E
   - 
+  - 
+  - 
+  - 
+  - N
+  - 
+  - 
+  - 
+  - 
+  - D
+  - 
+  - 
+  - 
+  - A
+  - P
+  - P
+  - 
+  - Y
   - 
   - 
   - 
   Words:
-  - KING
-  - ZORT
+  - "T\u0130ME"
+  - END
+  - DAY
+  - APP
+  CanEarnReward: 1
+  LevelBackground: {fileID: 21300000, guid: 5ff553d937f14ca4e8f8f44d618618ac, type: 3}
